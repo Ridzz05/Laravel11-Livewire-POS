@@ -9,4 +9,6 @@ https://tailwindcss.com/docs/guides/laravel
 
 welcome.blade => deleted.. user livewire file
 
-selalu lihat web routes
+=> selalu lihat web routes
+
+Font menggunakan google font Montserrat+Alternates
