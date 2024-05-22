@@ -13,7 +13,7 @@ Route::get('/', function () {
 //group middleware
 Route::middleware('auth')->group(function () {
     Route::get('/home', Home::class)->name('home');
-    Route::get('/profile', Profile::class)->name('home');
+    Route::get('/profile', Profile::class)->name('profile');
 });
 
 //middleware guest, sehingga kalau belum login tidak bisa akses halaman pada middleware auth
