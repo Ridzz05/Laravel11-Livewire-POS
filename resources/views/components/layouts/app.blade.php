@@ -19,7 +19,8 @@
             <div class="drawer-content">
                 <!-- Page content here -->
                 @livewire('partials.navbar')
-                <label for="drawer" class="btn btn-primary drawer-button">Open drawer</label>
+                {{-- slot mengarah ke masing masing blade --}}
+                {{ $slot }}
             </div>
             <div class="drawer-side">
                 <label for="drawer" aria-label="close sidebar" class="drawer-overlay"></label>
