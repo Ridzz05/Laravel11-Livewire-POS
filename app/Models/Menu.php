@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Menu extends Model
 {
@@ -18,8 +19,16 @@ class Menu extends Model
     ];
 
     //Helper harga format, agar bisa dipanggil dengan $menu->harga karena menggunakan nama attribute -> get(NamaYangDigunakan)Attribute
-    public function gethargaAttribute()
+    //dengan menggunakan accessor, kita bisa membuat attribute baru yang bisa dipanggil dengan cara yang sama seperti attribute biasa
+    public function getHargaAttribute()
     {
         return 'Rp. ' . number_format($this->price, 0, ',', '.');
+    }
+
+    // if image null
+    public function getGambarAttribute()
+    {
+        // asset mengaraha ke public
+        return $this->photo ? Storage::url($this->photo) : asset('no-image.png');
     }
 }
