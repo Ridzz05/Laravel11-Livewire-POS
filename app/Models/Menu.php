@@ -16,4 +16,10 @@ class Menu extends Model
         'type',
         'photo',
     ];
+
+    //Helper harga format, agar bisa dipanggil dengan $menu->harga karena menggunakan nama attribute -> get(NamaYangDigunakan)Attribute
+    public function gethargaAttribute()
+    {
+        return 'Rp. ' . number_format($this->price, 0, ',', '.');
+    }
 }

@@ -13,9 +13,9 @@
                 @foreach ($menus as $menu)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $menu->price }}</td>
-                        <td>{{ $menu->desc }}</td>
                         <td>{{ $menu->name }}</td>
+                        <td>{{ $menu->oke }}</td>
+                        <td>{{ $menu->desc }}</td>
                         <td>
                             <butto class="btn btn-square btn-primary btn-xs">
                                 <x-tabler-edit class="size-4" />
