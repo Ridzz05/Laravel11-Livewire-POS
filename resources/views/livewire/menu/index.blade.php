@@ -51,4 +51,5 @@
             </tbody>
         </table>
     </div>
+    @livewire('menu.actions')
 </div>

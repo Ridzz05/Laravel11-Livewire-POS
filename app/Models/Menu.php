@@ -25,6 +25,14 @@ class Menu extends Model
         return 'Rp. ' . number_format($this->price, 0, ',', '.');
     }
 
+    //make static data type
+    public static $types = [
+        'coffee',
+        'non-coffee',
+        'tea',
+        'dessert'
+    ];
+
     // if image null
     public function getGambarAttribute()
     {
