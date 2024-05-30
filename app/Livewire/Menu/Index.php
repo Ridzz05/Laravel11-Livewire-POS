@@ -7,6 +7,10 @@ use Livewire\Component;
 
 class Index extends Component
 {
+
+    //dispatch reload
+    protected $listeners = ['reload' => '$refresh'];
+
     public $no = 1; //declare variable no
 
     public function render()

@@ -1,7 +1,8 @@
 <div>
-    <input type="checkbox" class="modal-toggle" @checked(true) />
+    <input type="checkbox" class="modal-toggle" @checked($show) />
     <div class="modal" role="dialog">
-        <div class="modal-box">
+    <!-- wire:submit mengarah ke simpan yang ada di Action livewire -->
+        <form class="modal-box" wire:submit="simpan">
             <h3 class="text-lg font-bold">Form input menu!</h3>
             <div class="space-y-2 py-4">
                 <div class="flex flex-col items-center justify-center">
@@ -27,7 +28,7 @@
                     <input type="text" placeholder="Nama..." @class([
                         'input input-bordered',
                         'input-error' => $errors->first('form.name'),
-                    ]) wire:model='form.menu' />
+                    ]) wire:model='form.name' />
                 </label>
                 {{-- harga --}}
                 <label class="form-control" for="">
@@ -48,6 +49,7 @@
                         'select select-bordered',
                         'select-error' => $errors->first('form.type'),
                     ]) wire:model='form.type'>
+                        <option value=""></option>
                         {{-- ambil data dari model menu dengan static $types, dipanggil dari livewire Actions --}}
                         @foreach ($types as $tipe)
                             <option value="{{ $tipe }}">{{ $tipe }}</option>
@@ -67,12 +69,12 @@
                 </label>
             </div>
             <div class="modal-action justify-between">
-                <button type="button" class="btn btn-ghost border-2">Close!</button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-ghost" wire:click="closeModal">Close!</button>
+                <button class="btn btn-primary">
                     <x-tabler-check class="size-5" />
                     <span>Save!</span>
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

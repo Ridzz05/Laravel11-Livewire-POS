@@ -12,3 +12,5 @@ welcome.blade => deleted.. user livewire file
 => selalu lihat web routes
 
 Font menggunakan google font Montserrat+Alternates
+
+=>gunakan pa storage:link

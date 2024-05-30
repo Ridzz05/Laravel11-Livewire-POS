@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Menu;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class MenuForm extends Form
@@ -20,10 +19,11 @@ class MenuForm extends Form
     public function setMenu(Menu $menu)
     {
         $this->menu = $menu;
+
         $this->name = $menu->name;
         $this->price = $menu->price;
-        $this->desc = $menu->description;
         $this->type = $menu->type;
+        $this->desc = $menu->desc;
         // $this->photo = $menu->photo;
     }
 
@@ -34,8 +34,13 @@ class MenuForm extends Form
             'name' => 'required',
             'price' => 'required|numeric',
             'type' => 'required',
-            'description' => '',
+            'desc' => '',
         ]);
+
+        //validasi photo
+        if($this->photo){
+            $validate['photo'] = $this->photo;
+        }
 
         // Save the menu
         Menu::create($validate);
@@ -51,8 +56,13 @@ class MenuForm extends Form
             'name' => 'required',
             'price' => 'required|numeric',
             'type' => 'required',
-            'description' => '',
+            'desc' => '',
         ]);
+
+        //validasi photo
+        if($this->photo){
+            $validate['photo'] = $this->photo;
+        }
 
         // update data menu
         $this->menu->update($validate);

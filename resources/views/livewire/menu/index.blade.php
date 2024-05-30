@@ -2,12 +2,13 @@
     {{-- search  --}}
     <div class="flex justify-between">
         <input type="text" class="input input-bordered" placeholder="Pencarian..">
-        <button class="btn btn-primary">
+
+        {{-- wire:click mengarah pada action liveweire --}}
+        <button class="btn btn-primary" wire:click="dispatch('createMenu')">
             <x-tabler-plus class="size-5" />
             <span>tambah menu</span>
         </button>
     </div>
-
 
     <div class="table-wrapper">
         <table class="table">
@@ -28,7 +29,7 @@
                             <div class="flex gap-2">
                                 <div class="avatar">
                                     {{-- photo --}}
-                                    <div class="w-12 rounded-lg">
+                                    <div class="w-10 rounded-lg">
                                         <img src="{{ $menu->gambar }}" alt="">
                                     </div>
                                 </div>
@@ -40,11 +41,20 @@
                             </div>
                         </td>
                         <td>{{ $menu->harga }}</td>
-                        <td>{{ $menu->desc }}</td>
-                        <td>
-                            <butto class="btn btn-square btn-xs">
+                        <!-- agar tidak terlalu kekanan -->
+                        <td class="whitespace-normal w-80">
+                            <div class="line-clamp-2">
+                                {{ $menu->desc }}
+                            </div>
+                        </td>
+                        <td class="flex gap-x-1">
+                            <!-- wire:click untuk edit data dengan membawa menu:id -->
+                            <button class="btn btn-warning btn-square btn-xs" wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
                                 <x-tabler-edit class="size-4" />
-                            </butto>
+                            </button>
+                            <button class="btn btn-error btn-square btn-xs" wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
+                                <x-tabler-trash class="size-4" s/>
+                            </button>
                         </td>
                     </tr>
                 @endforeach
