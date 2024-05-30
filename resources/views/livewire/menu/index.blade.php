@@ -1,7 +1,8 @@
 <div class="page-wrapper">
     {{-- search  --}}
     <div class="flex justify-between">
-        <input type="text" class="input input-bordered" placeholder="Pencarian..">
+        <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
+        <input type="text" class="input input-bordered" placeholder="Pencarian.." wire:model.live="search">
 
         {{-- wire:click mengarah pada action liveweire --}}
         <button class="btn btn-primary" wire:click="dispatch('createMenu')">
@@ -17,7 +18,7 @@
                 <th>Menu</th>
                 <th>Harga</th>
                 <th>Keterangan</th>
-                <th>Aksi</th>
+                <th class="text-center">Aksi</th>
             </thead>
             <tbody>
                 {{-- foreach dari livewire --}}
@@ -47,7 +48,8 @@
                                 {{ $menu->desc }}
                             </div>
                         </td>
-                        <td class="flex gap-x-1">
+                        <td>
+                            <div class="flex gap-1 justify-center">
                             <!-- wire:click untuk edit data dengan membawa menu:id -->
                             <button class="btn btn-warning btn-square btn-xs" wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
                                 <x-tabler-edit class="size-4" />
@@ -55,6 +57,7 @@
                             <button class="btn btn-error btn-square btn-xs" wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
                                 <x-tabler-trash class="size-4" s/>
                             </button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
