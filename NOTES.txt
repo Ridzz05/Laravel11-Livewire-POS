@@ -13,4 +13,7 @@ welcome.blade => deleted.. user livewire file
 
 Font menggunakan google font Montserrat+Alternates
 
+php artisan make:livewire ...
+php artisan livewire:Form ...
+
 =>gunakan pa storage:link

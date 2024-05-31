@@ -43,20 +43,22 @@
                         </td>
                         <td>{{ $menu->harga }}</td>
                         <!-- agar tidak terlalu kekanan -->
-                        <td class="whitespace-normal w-80">
+                        <td class="w-80 whitespace-normal">
                             <div class="line-clamp-2">
                                 {{ $menu->desc }}
                             </div>
                         </td>
                         <td>
-                            <div class="flex gap-1 justify-center">
-                            <!-- wire:click untuk edit data dengan membawa menu:id -->
-                            <button class="btn btn-warning btn-square btn-xs" wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
-                                <x-tabler-edit class="size-4" />
-                            </button>
-                            <button class="btn btn-error btn-square btn-xs" wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
-                                <x-tabler-trash class="size-4" s/>
-                            </button>
+                            <div class="flex justify-center gap-1">
+                                <!-- wire:click untuk edit data dengan membawa menu:id -->
+                                <button class="btn-s btn btn-square btn-warning"
+                                    wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
+                                    <x-tabler-edit class="size-4" />
+                                </button>
+                                <button class="btn-s btn btn-square btn-error"
+                                    wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
+                                    <x-tabler-trash class="size-4" s />
+                                </button>
                             </div>
                         </td>
                     </tr>

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Menu;
+namespace App\Livewire\Customer;
 
-use App\Models\Menu;
+use App\Models\Customer;
 use Livewire\Component;
 
 class Index extends Component
@@ -18,13 +18,13 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.menu.index', [ //parsing data
+        return view('livewire.customer.index', [ //parsing data
             // tambahkan ketika ada search
-            'menus' => Menu::when($this->search, function ($menu) {
-                $menu->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('type', 'like', '%' . $this->search . '%')
+            'customers' => Customer::when($this->search, function ($customer) {
+                $customer->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('contact', 'like', '%' . $this->search . '%')
                     ->orWhere('desc', 'like', '%' . $this->search . '%');
-            })->get() //getAll data menu
+            })->get() //getAll data customer
         ]);
     }
 }

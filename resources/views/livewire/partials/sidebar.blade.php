@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="" @class(['active' => false]) wire:navigate>
+                <a href="{{ route('customer.index') }}" @class(['active' => Route::is('customer.index')]) wire:navigate>
                     <x-tabler-users class="size-5" />
                     <span>Data Customer</span>
                 </a>
