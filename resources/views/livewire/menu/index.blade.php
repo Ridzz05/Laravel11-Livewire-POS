@@ -30,7 +30,7 @@
                             <div class="flex gap-2">
                                 <div class="avatar">
                                     {{-- photo --}}
-                                    <div class="w-10 rounded-lg">
+                                    <div class="w-10 rounded-lg border-2">
                                         <img src="{{ $menu->gambar }}" alt="">
                                     </div>
                                 </div>

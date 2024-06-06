@@ -34,12 +34,12 @@ class Actions extends Component
     public function simpan()
     {
         // jika photo tidak kosong maka simpan ke storage
-        if($this->photo){
+        if ($this->photo) {
             $this->form->photo = $this->photo->hashName('menu');
             $this->photo->store('menu');
         }
 
-        if(isset($this->form->menu)){
+        if (isset($this->form->menu)) {
             // jika membawa data maka lakukan update
             $this->form->update();
         } else {
@@ -78,7 +78,8 @@ class Actions extends Component
     public function closeModal()
     {
         $this->show = false;
-        $this->form->reset();
+        $this->photo = null; //hilangkan photo
+        $this->form->reset(); //reset all form
     }
 
     public function render()

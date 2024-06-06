@@ -1,14 +1,14 @@
 <div>
     <input type="checkbox" class="modal-toggle" @checked($show) />
     <div class="modal" role="dialog">
-    <!-- wire:submit mengarah ke simpan yang ada di Action livewire -->
+        <!-- wire:submit mengarah ke simpan yang ada di Action livewire -->
         <form class="modal-box" wire:submit="simpan">
             <h3 class="text-lg font-bold">Form input menu!</h3>
             <div class="space-y-2 py-4">
                 <div class="flex flex-col items-center justify-center">
                     {{-- photo --}}
                     <label for="pickPhoto" class="avatar">
-                        <div class="w-32 rounded-xl">
+                        <div class="w-32 rounded-xl border-2">
                             <img class="cursor-pointer"
                                 src="{{ $photo ? $photo->temporaryUrl() : url('no-image.png') }}">
                         </div>
