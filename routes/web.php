@@ -17,6 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/menu', \App\Livewire\Menu\Index::class)->name('menu.index');
     Route::get('/customer', \App\Livewire\Customer\Index::class)->name('customer.index');
+
+    //transaksi
+    Route::get('/transaksi/create', \App\Livewire\Transaksi\Actions::class)->name('transaksi.create');
 });
 
 //middleware guest, sehingga kalau belum login tidak bisa akses halaman pada middleware auth

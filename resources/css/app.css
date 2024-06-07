@@ -7,42 +7,46 @@
 @tailwind utilities;
 
 html {
-  /* font-family: "Montserrat Alternates", sans-serif; */
-  font-family: "Poppins", monospace;
-  /* semua akan menjadi semibold pada html, scrollbar akan di hide */
-  @apply font-semibold scrollbar-hide;
+    /* font-family: "Montserrat Alternates", sans-serif; */
+    font-family: "Poppins", monospace;
+    /* semua akan menjadi semibold pada html, scrollbar akan di hide */
+    @apply font-semibold scrollbar-hide;
 }
 
 thead {
-  @apply border-b-4 bg-base-200 bg-base-200/50;
+    @apply border-b-4 bg-base-200 bg-base-200/50;
 }
 
 .textarea-bordered,
 .file-input-bordered,
 .select-bordered,
 .input-bordered {
-  @apply border-2 border-base-300;
+    @apply border-2 border-base-300;
 }
 
 .textarea-error,
 .file-input-error,
 .select-error,
 .input-error {
-  @apply border-2 border-error;
+    @apply border-2 border-error;
 }
 
 .card {
-  @apply bg-base-100 border-2 border-base-300;
+    @apply bg-base-100 border-2 border-base-300;
 }
 
 .page-wrapper {
-  @apply container max-w-6xl w-full p-6 mx-auto space-y-6;
+    @apply container max-w-6xl w-full p-6 mx-auto space-y-6;
 }
 
 .table-wrapper {
-  @apply bg-base-100 border-2 border-base-300 overflow-x-auto rounded-lg whitespace-nowrap;
+    @apply bg-base-100 border-2 border-base-300 overflow-x-auto rounded-lg whitespace-nowrap;
 }
 
 .modal-box {
-  @apply scrollbar-hide;
+    @apply scrollbar-hide;
+}
+
+.card-divider {
+    @apply divide-y-2 divide-base-300;
 }
