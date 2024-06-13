@@ -36,7 +36,8 @@
 
                 {{-- @json($items, JSON_PRETTY_PRINT) --}}
                 {{-- table --}}
-                <div class="table-wrapper">
+                {{-- @class if error --}}
+                <div @class(['table-wrapper', 'border-error' => $errors->first('items')])>
                     <table class="table">
                         <thead>
                             <th>Nama Menu</th>
@@ -63,20 +64,23 @@
                     </table>
                 </div>
 
-                <select class="select select-bordered" wire:model='customer_id'>
+                {{-- wire:model mengacu pada form --}}
+                <select class="select select-bordered" wire:model='form.customer_id'>
                     <option value="">Pilih Customer</option>
                     @foreach ($customers as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
 
+                {{-- wire:model mengacu pada form --}}
                 <textarea rows="5" class="textarea textarea-bordered"
-                    placeholder="keterangan dapat diisi dengan jenis pembayaran atau nomor meja" wire:model='desc'></textarea>
+                    placeholder="keterangan dapat diisi dengan jenis pembayaran atau nomor meja" wire:model='form.desc'></textarea>
 
                 <div class="card-actions justify-between">
                     <div class="flex flex-col">
                         <div class="text-xs">Total</div>
-                        <div class="card-title">Rp. {{ Number::format($this->getTotalPrice()) }}</div>
+                        {{-- @class if error --}}
+                        <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp. {{ Number::format($this->getTotalPrice()) }}</div>
                     </div>
                     <button class="btn btn-primary">
                         <x-tabler-check class="size-5" />

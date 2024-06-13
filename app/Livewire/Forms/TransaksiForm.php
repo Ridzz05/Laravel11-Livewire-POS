@@ -19,6 +19,7 @@ class TransaksiForm extends Form
     public function setTransaksi(Transaksi $transaksi)
     {
         $this->transaksi = $transaksi;
+
         $this->customer_id = $transaksi->customer_id;
         $this->items = $transaksi->items;
         $this->desc = $transaksi->desc;
@@ -29,15 +30,14 @@ class TransaksiForm extends Form
     public function store()
     {
         $validate = $this->validate([
-            'customer_id' => 'required',
+            'customer_id' => '',
             'items' => 'required',
-            'desc' => '',
-            'price' => 'required|numeric',
-            'done' => '',
+            'desc' => 'required',
+            'price' => 'required',
+            'done' => 'required',
         ]);
 
         Transaksi::create($validate);
-
         $this->reset();
     }
 
@@ -46,13 +46,12 @@ class TransaksiForm extends Form
         $validate = $this->validate([
             'customer_id' => 'required',
             'items' => 'required',
-            'desc' => '',
-            'price' => 'required|numeric',
-            'done' => '',
+            'desc' => 'required',
+            'price' => 'required',
+            'done' => 'required',
         ]);
 
         $this->transaksi->update($validate);
-
         $this->reset();
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('items');
             $table->text('desc');
             $table->integer('price');
-            $table->boolean('done')->default('false');
+            $table->boolean('done')->default(false);
             $table->timestamps();
         });
     }

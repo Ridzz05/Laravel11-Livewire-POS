@@ -14,9 +14,10 @@ class Actions extends Component
     public $search;
 
     //item total public property
-    public $items = []; //ini akan menyimpan 2 data obj yaitu qty dan price
+    public $items = []; //ini akan menyimpan 2 data obj yaitu nama makanan , qty dan price
 
-    public ?TransaksiForm $form;
+    //form
+    public TransaksiForm $form;
 
     public function addItem(Menu $menu)
     {
@@ -66,8 +67,26 @@ class Actions extends Component
         return array_sum($prices);
     }
 
+    //function untuk simpan transaksi (pada tombol simpan berada di form transaksi->warna kuning)
     public function simpan()
     {
+        //validate
+        $this->validate([
+            'items' => 'required',
+        ]);
+
+        //set, ambil seluruh data dalam form items dimasukkan dalam arrat
+        $this->form->items = $this->items;
+        //set dalam form price ke getTotalPrice
+        $this->form->price = $this->getTotalPrice();
+
+        //jalankan store pada form
+        $this->form->store();
+
+        //jika sudah redirect ke index riwayat transaksi
+        $this->redirect(route('transaksi.index'), true);
+
+        // dd($this->items, $this->form->customer_id, $this->form->desc);
     }
 
     public function render()
