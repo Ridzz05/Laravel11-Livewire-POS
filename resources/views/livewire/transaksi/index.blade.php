@@ -42,6 +42,10 @@
                         {{-- action --}}
                         <td>
                             <div class="flex justify-center gap-1">
+                                <button class="btn btn-xs"
+                                    wire:click="$dispatch('detailTransaksi', {transaksi: {{ $transaksi->id }}})">
+                                    <x-tabler-folder class="size-4" />
+                                </button>
                                 <a href="{{ route('transaksi.edit', $transaksi) }}" class="btn btn-xs">
                                     <x-tabler-edit class="size-4" />
                                 </a>
@@ -55,4 +59,7 @@
             </tbody>
         </table>
     </div>
+
+    {{-- panggil livewire detail, dispatch --}}
+    @livewire('transaksi.detail')
 </div>
