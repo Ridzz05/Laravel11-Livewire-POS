@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                             {{-- <span>{{ dd($items['qty']) }}</span> --}}
-                            @foreach ($items as $key => $value)
+                            @foreach ($items ?? [] as $key => $value)
                                 <tr>
                                     <td>{{ $key }}</td>
                                     <td>{{ $value['qty'] }}</td>
@@ -73,7 +73,10 @@
                 </select>
 
                 {{-- wire:model mengacu pada form --}}
-                <textarea rows="5" class="textarea textarea-bordered"
+                <textarea rows="5" @class([
+                    'textarea textarea-bordered',
+                    'textarea-error' => $errors->first('form.desc'),
+                ])"
                     placeholder="keterangan dapat diisi dengan jenis pembayaran atau nomor meja" wire:model='form.desc'></textarea>
 
                 <div class="card-actions justify-between">

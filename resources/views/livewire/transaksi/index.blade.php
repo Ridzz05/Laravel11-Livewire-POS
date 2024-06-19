@@ -42,7 +42,7 @@
                         {{-- action --}}
                         <td>
                             <div class="flex justify-center gap-1">
-                                <a href="" class="btn btn-xs">
+                                <a href="{{ route('transaksi.edit', $transaksi) }}" class="btn btn-xs">
                                     <x-tabler-edit class="size-4" />
                                 </a>
                                 <button class="btn btn-xs" wire:click='deleteTransaksi({{ $transaksi->id }})'>
