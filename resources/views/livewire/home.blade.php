@@ -44,4 +44,35 @@
             </div>
         </div>
     </div>
+
+    {{-- table --}}
+    <h2 class="text-center text-2xl font-bold uppercase underline">Transaksi belum selesai</h2>
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Customer</th>
+                <th>Keterangan</th>
+                <th>Total Bayar</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                @foreach ($datas as $data)
+                    {{-- wire key berfungsi untuk key yang bersifat unique dalam perulangan livewire --}}
+                    <tr wire:key='{{ $data->id }}'>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->created_at->format('d F Y') }}</td>
+                        <td>{{ $data->customer?->name ?? '-' }}</td>
+                        <td>{{ $data->desc }}</td>
+                        <td>{{ Number::format($data->price) }}</td>
+                        <td>
+                            <input type="checkbox" class="toggle toggle-primary toggle-sm" @checked($data->done)
+                                wire:change='toggleDone({{ $data->id }})'>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>

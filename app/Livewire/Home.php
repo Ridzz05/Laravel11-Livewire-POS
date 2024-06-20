@@ -7,6 +7,11 @@ use Livewire\Component;
 
 class Home extends Component
 {
+    public function toggleDone(Transaksi $transaksi)
+    {
+        $transaksi->done = !$transaksi->done;
+        $transaksi->save();
+    }
     public function render()
     {
         // ambil tahun dan bulan dengan menggunakan explode dari Y-m
@@ -18,6 +23,7 @@ class Home extends Component
         return view('livewire.home', [
             'monthly' => $transaksi->get()->sum('price'),
             'today' => $transaksi->whereDate('created_at', $today)->get(),
+            'datas' => Transaksi::where('done', false)->get(),
         ]);
     }
 }
