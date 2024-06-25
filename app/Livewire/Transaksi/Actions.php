@@ -77,11 +77,6 @@ class Actions extends Component
     //function untuk simpan transaksi (pada tombol simpan berada di form transaksi->warna kuning)
     public function simpan()
     {
-        //validate
-        $this->validate([
-            'items' => 'required',
-        ]);
-
         //set, ambil seluruh data dalam form items dimasukkan dalam arrat
         $this->form->items = $this->items;
         //set dalam form price ke getTotalPrice

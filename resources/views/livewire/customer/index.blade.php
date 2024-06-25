@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     {{-- search  --}}
-    <div class="flex justify-between">
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
         <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
         <input type="text" class="input input-bordered" placeholder="Pencarian.." wire:model.live="search">
 
@@ -27,7 +27,7 @@
                         <td>{{ $no++ }}</td>
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->contact }}</td>
-                        <td>{{ $customer->desc }}</td>
+                        <td>{{ Str::limit($customer->desc, 50) }}</td>
                         <td>
                             <div class="flex justify-center gap-1">
                                 <!-- wire:click untuk edit data dengan membawa customer:id -->

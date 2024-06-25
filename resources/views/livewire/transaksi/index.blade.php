@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     {{-- search --}}
-    <div class="flex justify-between">
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
         <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
         <input type="date" class="input input-bordered" wire:model.live="date">
 
@@ -28,13 +28,8 @@
                         <td>{{ $transaksi->desc }}</td>
                         <td>
                             {{ $transaksi->customer->name ?? '-' }}
-                            {{-- @if ($transaksi->customer->name == null)
-                                <span>-</span>
-                            @else
-                                {{ $transaksi->customer->name }}
-                            @endif --}}
                         </td>
-                        <td>{{ Number::format($transaksi->price) }}</td>
+                        <td>Rp. {{ Number::format($transaksi->price) }}</td>
                         <td>
                             <input type="checkbox" class="toggle toggle-primary toggle-sm" @checked($transaksi->done)
                                 wire:change='toggleDone({{ $transaksi->id }})'>

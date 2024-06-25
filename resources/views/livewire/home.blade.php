@@ -1,8 +1,8 @@
 <div class="page-wrapper">
     {{-- bagi menjadi 3 kolom --}}
-    <div class="grid grid-cols-3 gap-6">
+    <div class="grid gap-2 md:grid-cols-3 md:gap-6">
         {{-- card 1 --}}
-        <div class="card card-compact">
+        <div class="card-compact card">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
                     <div class="w-12 rounded-full bg-warning">
@@ -16,7 +16,7 @@
             </div>
         </div>
         {{-- card 2 --}}
-        <div class="card card-compact">
+        <div class="card-compact card">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
                     <div class="w-12 rounded-full bg-warning">
@@ -30,7 +30,7 @@
             </div>
         </div>
         {{-- card 3 --}}
-        <div class="card card-compact">
+        <div class="card-compact card">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
                     <div class="w-12 rounded-full bg-warning">
@@ -46,7 +46,7 @@
     </div>
 
     {{-- table --}}
-    <h2 class="text-center text-2xl font-bold uppercase underline">Transaksi belum selesai</h2>
+    <h2 class="text-center font-bold uppercase underline md:text-2xl">Transaksi belum selesai</h2>
     <div class="table-wrapper">
         <table class="table">
             <thead>

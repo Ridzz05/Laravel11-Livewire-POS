@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     {{-- buat menjadi 2 bagian menggunakan grid (kanan dan kiri) --}}
-    <div class="grid grid-cols-2 gap-6">
+    <div class="grid gap-2 md:grid-cols-2 md:gap-6">
         <div class="card-divider card h-fit">
             {{-- sebalah kiri --}}
             <div class="card-body">
@@ -37,7 +37,10 @@
                 {{-- @json($items, JSON_PRETTY_PRINT) --}}
                 {{-- table --}}
                 {{-- @class if error --}}
-                <div @class(['table-wrapper', 'border-error' => $errors->first('items')])>
+                <div @class([
+                    'table-wrapper',
+                    'border-error' => $errors->first('form.items'),
+                ])>
                     <table class="table">
                         <thead>
                             <th>Nama Menu</th>
@@ -83,7 +86,7 @@
                     <div class="flex flex-col">
                         <div class="text-xs">Total</div>
                         {{-- @class if error --}}
-                        <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp. {{ Number::format($this->getTotalPrice()) }}</div>
+                        <div @class(['card-title', 'text-error' => $errors->first('form.items')])>Rp. {{ Number::format($this->getTotalPrice()) }}</div>
                     </div>
                     <button class="btn btn-primary">
                         <x-tabler-check class="size-5" />

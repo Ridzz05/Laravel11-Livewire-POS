@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     {{-- search  --}}
-    <div class="flex justify-between">
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
         <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
         <input type="text" class="input input-bordered" placeholder="Pencarian.." wire:model.live="search">
 
