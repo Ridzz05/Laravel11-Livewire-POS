@@ -38,13 +38,13 @@
 
 <script>
     // checkbox jika theme dipilih
-    document.getElementById('theme-toggle').checked = localStorage.getItem('theme') === 'dark';
+    document.getElementById('theme-toggle').checked = localStorage.getItem('theme') === 'dracula';
 
     // function ketika checkbox di klik
     document.getElementById('theme-toggle').addEventListener('change', function(e) {
         let currentTheme = localStorage.getItem('theme');
 
-        const newTheme = currentTheme === 'cupcake' ? 'dark' : 'cupcake';
+        const newTheme = currentTheme === 'bumblebee' ? 'dracula' : 'bumblebee';
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
 

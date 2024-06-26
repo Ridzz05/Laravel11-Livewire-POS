@@ -12,17 +12,17 @@
                     {{-- tampilkan data --}}
                     <h3 class="text-xl font-bold capitalize">{{ $type }}</h3>
                     {{-- <pre>@json($menu, JSON_PRETTY_PRINT)</pre> --}}
-                    <div class="grid grid-cols-4">
+                    <div class="grid grid-cols-4 gap-x-2">
                         @foreach ($menu as $item)
                             {{-- class avatar milik daisyui --}}
                             <div class="flex flex-col">
                                 {{-- ubah menjadi button karena jika di klik akan mengarah ke method addItem yang berada pada Action Transaksi dan ditambahkan pada table disamping --}}
                                 <button class="avatar" wire:click='addItem({{ $item->id }})'>
                                     <div class="w-full rounded">
-                                        <img src="{{ $item->gambar }}" alt="">
+                                        <img src="{{ $item->gambar }}" alt="" class="border-2">
                                     </div>
                                 </button>
-                                <h5 class="text-center text-[10px] font-normal">{{ $item->name }}</h5>
+                                <h5 class="m-2 text-center text-[10px] font-normal">{{ $item->name }}</h5>
                             </div>
                         @endforeach
                     </div>

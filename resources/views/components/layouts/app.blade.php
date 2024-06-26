@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
-{{-- data-theme="{{ localStorage . getItem('theme') || 'cupcake' }}" --}}
 
 <head>
     <meta charset="utf-8">
@@ -42,9 +41,7 @@
     @livewireScripts
 
     <script>
-        document.getElementById('html').setAttribute('data-theme', localStorage.getItem('theme') ?? 'cupcake');
-
-        localStorage.setItem('theme', localStorage.getItem('theme') ?? 'cupcake');
+        document.getElementById('html').setAttribute('data-theme', localStorage.getItem('theme') ?? 'bumblebee');
     </script>
 </body>
 
