@@ -11,6 +11,5 @@ export default {
     plugins: [require("daisyui"), require("tailwind-scrollbar-hide")],
     daisyui: {
         themes: ["bumblebee", "dracula"],
-        draculaTheme: false,
     },
 };

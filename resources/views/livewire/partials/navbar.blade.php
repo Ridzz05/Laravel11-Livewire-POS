@@ -1,4 +1,4 @@
-<div class="navbar border-b-2 border-base-300 bg-base-100">
+<div class="navbar border-b-2 border-base-300 bg-base-100 print:hidden">
     {{-- humberger menu --}}
     <div class="navbar-start">
         <label for="drawer" class="btn btn-circle btn-ghost">
@@ -10,7 +10,7 @@
         <a href="{{ route('home') }}" class="btn btn-ghost text-xl" wire:navigate>{{ config('app.name') }}</a>
     </div>
     {{-- plus menu --}}
-    <div class="navbar-end">
+    <div class="navbar-end gap-2">
         {{-- theme --}}
         <label class="grid cursor-pointer place-items-center">
             <input type="checkbox" class="theme-controller toggle col-span-2 col-start-1 row-start-1 bg-base-content"
@@ -30,9 +30,13 @@
             </svg>
         </label>
         {{-- button add --}}
-        <a href="{{ route('transaksi.create') }}" class="btn btn-circle btn-ghost" wire:navigate>
+        {{-- <a href="{{ route('transaksi.create') }}" class="btn btn-circle btn-ghost" wire:navigate>
             <x-tabler-plus class="size-5" />
-        </a>
+        </a> --}}
+        {{-- button logout --}}
+        <button wire:click='logout' class="btn btn-circle btn-ghost">
+            <x-tabler-logout class="size-5" />
+        </button>
     </div>
 </div>
 

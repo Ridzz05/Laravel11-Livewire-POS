@@ -2,10 +2,10 @@
     {{-- bagi menjadi 3 kolom --}}
     <div class="grid gap-2 md:grid-cols-3 md:gap-6">
         {{-- card 1 --}}
-        <div class="card-compact card">
+        <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
-                    <div class="w-12 rounded-full bg-warning">
+                    <div class="w-12 rounded-full bg-primary">
                         <x-tabler-calendar-month class="size-6" />
                     </div>
                 </div>
@@ -16,10 +16,10 @@
             </div>
         </div>
         {{-- card 2 --}}
-        <div class="card-compact card">
+        <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
-                    <div class="w-12 rounded-full bg-warning">
+                    <div class="w-12 rounded-full bg-primary">
                         <x-tabler-calendar-check class="size-6" />
                     </div>
                 </div>
@@ -30,10 +30,10 @@
             </div>
         </div>
         {{-- card 3 --}}
-        <div class="card-compact card">
+        <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
-                    <div class="w-12 rounded-full bg-warning">
+                    <div class="w-12 rounded-full bg-primary">
                         <x-tabler-list-check class="size-6" />
                     </div>
                 </div>
@@ -56,6 +56,7 @@
                 <th>Keterangan</th>
                 <th>Total Bayar</th>
                 <th>Status</th>
+                <th>Cetak</th>
             </thead>
             <tbody>
                 @foreach ($datas as $data)
@@ -69,6 +70,13 @@
                         <td>
                             <input type="checkbox" class="toggle toggle-primary toggle-sm" @checked($data->done)
                                 wire:change='toggleDone({{ $data->id }})'>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs"
+                                onclick="return cetakStruk('{{ route('transaksi.cetak', $data) }}')">
+                                <x-tabler-printer class="size-4" />
+                                <span>cetak</span>
+                            </button>
                         </td>
                     </tr>
                 @endforeach

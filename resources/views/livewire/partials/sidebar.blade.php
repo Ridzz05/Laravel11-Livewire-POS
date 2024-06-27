@@ -49,12 +49,12 @@
                     <span>Edit Profile</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <button wire:click='logout'>
                     <x-tabler-logout class="size-5" />
                     <span>Logout</span>
                 </button>
-            </li>
+            </li> --}}
         </ul>
     </li>
 </ul>

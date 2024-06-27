@@ -38,8 +38,14 @@
 
             </div>
             {{-- <p class="py-4">This modal works with a hidden checkbox!</p> --}}
-            <div class="modal-action">
+            <div class="modal-action justify-between">
                 <button type="button" wire:click='closeModal' class="btn btn-ghost">Close</button>
+                @isset($transaksi)
+                    <a href="{{ route('transaksi.cetak', $transaksi->id) }}" wire:click='closeModal' class="btn btn-primary"
+                        onclick="return cetakStruk('{{ route('transaksi.cetak', $transaksi) }}')">
+                        <x-tabler-printer class="size-5" /> cetak
+                    </a>
+                @endisset
             </div>
         </div>
     </div>
