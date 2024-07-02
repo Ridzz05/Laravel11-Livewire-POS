@@ -51,7 +51,6 @@
         const newTheme = currentTheme === 'bumblebee' ? 'dracula' : 'bumblebee';
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-
         // console.log(e.target.value)
     })
 </script>

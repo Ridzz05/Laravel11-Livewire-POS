@@ -38,7 +38,7 @@ class Index extends Component
         return view('livewire.transaksi.index', [
             'transaksis' => Transaksi::when($this->date, function ($transaksi) {
                 $transaksi->whereDate('created_at', $this->date);
-            })->get()
+            })->latest()->get()
         ]);
     }
 }

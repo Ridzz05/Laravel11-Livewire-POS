@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" id="html">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
     @livewireStyles
 </head>
 
-<body class="min-h-screen bg-base-200">
+<body class="min-h-screen bg-base-200" data-theme="">
     {{-- auth --}}
     @auth
         {{-- jika layar lg maka otomatis drawer open -> daisy ui --}}
@@ -42,7 +42,12 @@
     @livewireScripts
 
     <script>
-        document.getElementById('html').setAttribute('data-theme', localStorage.getItem('theme') ?? 'bumblebee');
+        document.addEventListener('DOMContentLoaded', function() {
+            // document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') ?? 'bumblebee');
+            // document.getElementById('html').setAttribute('data-theme', localStorage.getItem('theme') ?? 'bumblebee');
+            localStorage.setItem('theme', localStorage.getItem('theme') ?? 'bumblebee');
+            document.body.setAttribute('data-theme', localStorage.getItem('theme') ?? 'bumblebee');
+        })
     </script>
 </body>
 

@@ -33,10 +33,13 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('transaksi.index') }}" @class(['active' => Route::is('transaksi.index')]) wire:navigate>
+                <a href="{{ route('transaksi.index') }}" @class(['active' => Route::is(['transaksi.index', 'transaksi.export'])]) wire:navigate>
                     <x-tabler-file class="size-5" />
                     <span>Riwayat Transaksi</span>
                 </a>
+            </li>
+            <li>
+                <a href=""></a>
             </li>
         </ul>
     </li>

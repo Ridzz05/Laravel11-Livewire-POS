@@ -4,9 +4,9 @@
         <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
         <input type="date" class="input input-bordered" wire:model.live="date">
 
-        <a href="{{ route('transaksi.create') }}" class="btn btn-primary">
-            <x-tabler-plus class="size-5" />
-            <span>tambah transaksi</span>
+        <a href="{{ route('transaksi.export') }}" class="btn btn-success" wire:navigate>
+            <x-tabler-file-export class="size-5" />
+            <span>export to excel</span>
         </a>
     </div>
     <div class="table-wrapper">
