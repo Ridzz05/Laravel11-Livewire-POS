@@ -1,7 +1,7 @@
 <div class="page-wrapper">
-    {{-- bagi menjadi 3 kolom --}}
-    <div class="grid gap-2 md:grid-cols-3 md:gap-6">
-        {{-- card 1 --}}
+    <!-- Statistik Pendapatan Card -->
+    <div class="grid gap-4 md:grid-cols-4 md:gap-6">
+        <!-- Pendapatan Bulan Ini -->
         <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
@@ -10,12 +10,13 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="text-xs opacity-60">Pendapatan bulan ini</div>
+                    <div class="text-xs opacity-60">Pendapatan Bulan Ini</div>
                     <div class="text-2xl font-bold">Rp. {{ Number::format($monthly) }}</div>
                 </div>
             </div>
         </div>
-        {{-- card 2 --}}
+
+        <!-- Pendapatan Hari Ini -->
         <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
@@ -24,12 +25,28 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="text-xs opacity-60">Pendapatan hari ini</div>
+                    <div class="text-xs opacity-60">Pendapatan Hari Ini</div>
                     <div class="text-2xl font-bold">Rp. {{ Number::format($today->sum('price')) }}</div>
                 </div>
             </div>
         </div>
-        {{-- card 3 --}}
+
+        <!-- Pendapatan Bulan Lalu -->
+        <div class="card card-compact">
+            <div class="card-body flex-row items-center gap-4">
+                <div class="avatar placeholder">
+                    <div class="w-12 rounded-full bg-primary">
+                        <x-tabler-calendar class="size-6" />
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="text-xs opacity-60">Pendapatan Bulan Lalu</div>
+                    <div class="text-2xl font-bold">Rp. {{ Number::format($previousMonth) }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pesanan Hari Ini -->
         <div class="card card-compact">
             <div class="card-body flex-row items-center gap-4">
                 <div class="avatar placeholder">
@@ -38,15 +55,23 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="text-xs opacity-60">Pesanan hari ini</div>
+                    <div class="text-xs opacity-60">Pesanan Hari Ini</div>
                     <div class="text-2xl font-bold">{{ $today->count() }} Pesanan</div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- table --}}
-    <h2 class="text-center font-bold uppercase underline md:text-2xl">Transaksi belum selesai</h2>
+    <!-- Grafik Statistik Penjualan -->
+    <h2 class="text-center font-bold uppercase underline md:text-2xl">Statistik Penjualan Bulanan</h2>
+    <div class="card card-compact">
+        <div class="card-body">
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Tabel Transaksi Belum Selesai -->
+    <h2 class="text-center font-bold uppercase underline md:text-2xl">Transaksi Belum Selesai</h2>
     <div class="table-wrapper">
         <table class="table">
             <thead>
@@ -60,7 +85,6 @@
             </thead>
             <tbody>
                 @foreach ($datas as $data)
-                    {{-- wire key berfungsi untuk key yang bersifat unique dalam perulangan livewire --}}
                     <tr wire:key='{{ $data->id }}'>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->created_at->format('d F Y') }}</td>
@@ -75,7 +99,7 @@
                             <button class="btn btn-xs"
                                 onclick="return cetakStruk('{{ route('transaksi.cetak', $data) }}')">
                                 <x-tabler-printer class="size-4" />
-                                <span>cetak</span>
+                                <span>Cetak</span>
                             </button>
                         </td>
                     </tr>
@@ -84,3 +108,40 @@
         </table>
     </div>
 </div>
+
+<!-- Script Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($chartLabels) !!},
+                datasets: [{
+                    label: 'Pendapatan Harian',
+                    data: {!! json_encode($chartData) !!},
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    hoverBackgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    hoverBorderColor: 'rgba(255, 99, 132, 1)',
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Pendapatan Harian Bulan Ini', font: { size: 16, weight: 'bold' } },
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Tanggal' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Pendapatan (Rp)' } }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutBounce'
+                }
+            }
+        });
+    });
+</script>

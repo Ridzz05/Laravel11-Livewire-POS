@@ -4,70 +4,89 @@ namespace App\Livewire\Forms;
 
 use App\Models\Menu;
 use Livewire\Form;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class MenuForm extends Form
 {
+    use WithFileUploads;
+
     public $name;
     public $price;
     public $desc;
     public $type = 'coffee';
     public $photo;
+    public ?Menu $menu = null;
 
-    public ?Menu $menu;
-
-    //set menu name
+    // Set menu name
     public function setMenu(Menu $menu)
     {
         $this->menu = $menu;
-
         $this->name = $menu->name;
         $this->price = $menu->price;
         $this->type = $menu->type;
         $this->desc = $menu->desc;
-        // $this->photo = $menu->photo;
+        $this->photo = null; // Reset photo for editing
     }
 
-    //function save data
+    // Function to save data
     public function store()
     {
-        $validate = $this->validate([
+        $validatedData = $this->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'type' => 'required',
-            'desc' => '',
+            'desc' => 'nullable',
+            'photo' => 'nullable|image|max:1024', // Validate image size (1MB max)
         ]);
 
-        //validasi photo
-        if($this->photo){
-            $validate['photo'] = $this->photo;
+        // Upload and save photo if available
+        if ($this->photo) {
+            $validatedData['photo'] = $this->photo->store('menu', 'public'); // Store in 'menu' directory
         }
 
-        // Save the menu
-        Menu::create($validate);
+        // Create the menu
+        Menu::create($validatedData);
 
         // Reset the form
-        $this->reset();
+        $this->resetForm(); // Reset all relevant fields after saving
     }
 
-    //function update data
+    // Function to update data
     public function update()
     {
-        $validate = $this->validate([
+        $validatedData = $this->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'type' => 'required',
-            'desc' => '',
+            'desc' => 'nullable',
+            'photo' => 'nullable|image|max:1024', // Validate image size (1MB max)
         ]);
 
-        //validasi photo
-        if($this->photo){
-            $validate['photo'] = $this->photo;
+        // Check if a new photo has been uploaded
+        if ($this->photo) {
+            // Store new photo and delete the old one if exists
+            $validatedData['photo'] = $this->photo->store('menu', 'public'); // Store in 'menu' directory
+            
+            // Optionally delete the old photo if it exists
+            if ($this->menu->photo && Storage::disk('public')->exists($this->menu->photo)) {
+                Storage::disk('public')->delete($this->menu->photo);
+            }
+        } else {
+            // If no new photo, retain the old photo
+            $validatedData['photo'] = $this->menu->photo;
         }
 
-        // update data menu
-        $this->menu->update($validate);
+        // Update the menu data
+        $this->menu->update($validatedData);
 
         // Reset the form
-        $this->reset();
+        $this->resetForm(); // Reset all relevant fields after updating
+    }
+
+    // Reset form fields
+    protected function resetForm()
+    {
+        $this->reset(['name', 'price', 'desc', 'type', 'photo']); // Reset relevant fields
     }
 }

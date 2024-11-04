@@ -4,10 +4,11 @@
         <!-- wire:model.live akan melalukan pencarian dengan filter secara langsung -->
         <input type="text" class="input input-bordered" placeholder="Pencarian.." wire:model.live="search">
 
-        {{-- wire:click mengarah pada action liveweire --}}
-        <button class="btn btn-primary" wire:click="dispatch('createCustomer')">
+        {{-- wire:click mengarah pada action livewire --}}
+        <button class="btn btn-primary" wire:click="dispatch('createCustomer')" wire:loading.attr="disabled">
             <x-tabler-plus class="size-5" />
             <span>tambah customer</span>
+            <span wire:loading wire:target="dispatch('createCustomer')" class="loading-spinner"></span>
         </button>
     </div>
 
@@ -30,15 +31,19 @@
                         <td>{{ Str::limit($customer->desc, 50) }}</td>
                         <td>
                             <div class="flex justify-center gap-1">
-                                <!-- wire:click untuk edit data dengan membawa customer:id -->
+                                <!-- wire:click for edit with customer:id -->
                                 <button class="btn-s btn btn-square btn-warning"
-                                    wire:click="$dispatch('editCustomer', {customer: {{ $customer->id }}})">
+                                    wire:click="$dispatch('editCustomer', {customer: {{ $customer->id }}})"
+                                    wire:loading.class="opacity-50 transition-opacity duration-30">
                                     <x-tabler-edit class="size-4" />
                                 </button>
                                 <button class="btn-s btn btn-square btn-error"
-                                    wire:click="$dispatch('deleteCustomer', {customer: {{ $customer->id }}})">
-                                    <x-tabler-trash class="size-4" s />
+                                    wire:click="$dispatch('deleteCustomer', {customer: {{ $customer->id }}})"
+                                    wire:loading.class="opacity-50 transition-opacity duration-30">
+                                    <x-tabler-trash class="size-4" />
                                 </button>
+                                <span wire:loading wire:target="$dispatch('editCustomer')" class="loading-spinner"></span>
+                                <span wire:loading wire:target="$dispatch('deleteCustomer')" class="loading-spinner"></span>
                             </div>
                         </td>
                     </tr>

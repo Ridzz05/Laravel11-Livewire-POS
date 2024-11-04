@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Transaksi;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class Home extends Component
 {
@@ -12,18 +13,44 @@ class Home extends Component
         $transaksi->done = !$transaksi->done;
         $transaksi->save();
     }
+
     public function render()
     {
-        // ambil tahun dan bulan dengan menggunakan explode dari Y-m
+        // Mendapatkan tahun, bulan, dan tanggal saat ini
         [$tahun, $bulan] = explode('-', date('Y-m'));
-        // atau bisa satuan
         $today = date('Y-m-d');
 
+        // Query transaksi bulanan
         $transaksi = Transaksi::whereMonth('created_at', $bulan)->whereYear('created_at', $tahun);
+
+        // Hitung pendapatan bulan ini, hari ini, dan bulan lalu
+        $monthly = $transaksi->sum('price');
+        $todaySales = $transaksi->whereDate('created_at', $today)->get();
+        $previousMonth = Transaksi::whereMonth('created_at', Carbon::now()->subMonth()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->sum('price');
+
+        // Data untuk chart (statistik penjualan per hari dalam bulan ini)
+        $chartLabels = [];
+        $chartData = [];
+        $daysInMonth = Carbon::createFromDate($tahun, $bulan)->daysInMonth;
+
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $date = Carbon::createFromDate($tahun, $bulan, $day)->toDateString();
+            $dailySales = Transaksi::whereDate('created_at', $date)->sum('price');
+
+            $chartLabels[] = $day; // Menambahkan hari ke label chart
+            $chartData[] = $dailySales; // Menambahkan pendapatan harian ke data chart
+        }
+
         return view('livewire.home', [
-            'monthly' => $transaksi->get()->sum('price'),
-            'today' => $transaksi->whereDate('created_at', $today)->get(),
+            'monthly' => $monthly,
+            'today' => $todaySales,
+            'previousMonth' => $previousMonth,
             'datas' => Transaksi::where('done', false)->get(),
+            'chartLabels' => $chartLabels,
+            'chartData' => $chartData,
         ]);
     }
 }
+    

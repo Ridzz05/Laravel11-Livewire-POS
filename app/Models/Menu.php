@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-
-// observer
+// Observer
 #[ObservedBy([MenuObserver::class])]
-
 class Menu extends Model
 {
     use HasFactory;
@@ -24,25 +22,26 @@ class Menu extends Model
         'photo',
     ];
 
-    //Helper harga format, agar bisa dipanggil dengan $menu->harga karena menggunakan nama attribute -> get(NamaYangDigunakan)Attribute
-    //dengan menggunakan accessor, kita bisa membuat attribute baru yang bisa dipanggil dengan cara yang sama seperti attribute biasa
+    // Helper untuk format harga
     public function getHargaAttribute()
     {
         return 'Rp. ' . number_format($this->price, 0, ',', '.');
     }
 
-    //make static data type
+    // Static data type
     public static $types = [
-        'coffee',
-        'non-coffee',
-        'tea',
-        'dessert'
+        'Wet Food Kemasan',
+        'Wet Food Kaleng',
+        'Wet Food Sachet',
+        'Dry Food Kemasan',
+        'Dry Food Kaleng',
+        'Dry Food Sachet',        
     ];
 
-    // if image null
+    // Akses gambar
     public function getGambarAttribute()
     {
-        // asset mengaraha ke public
+        // Mengembalikan URL gambar atau gambar default jika tidak ada
         return $this->photo ? Storage::url($this->photo) : asset('no-image.png');
     }
 }
